@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Routine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('bg.png') no-repeat center center fixed;
+            
+        }
+        .container {
+          
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            color: #333;
+        }
+        select, button {
+            padding: 10px 15px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            color: #000; /* Set to black */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>College Subject Routine</h1>
+        <label for="day">Select a Day:</label>
+        <select id="day">
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+        </select>
+        <button onclick="showRoutine()">Show Routine</button>
+        <ul id="routine"></ul>
+    </div>
+
+    <script>
+        const routines = {
+            Sunday: [
+                "Physics (K.D)", "Chemistry (S.R)", "Chemistry (P.N)", "Physics practical (D.N)",
+                "Chemistry practical (P.N)", "Computer (M.S)"
+            ],
+            Monday: [
+                "Chemistry (J.Y)", "Chemistry (S.R)", "Math (K.P)", "Physics (R.P)", 
+                "Computer (M.S)", "Physics (D.N)", "Math (N.D)"
+            ],
+            Tuesday: [
+                "Physics (R.P)", "Physics (K.D)", "Chemistry (S.R)", "Physics (D.N)", 
+                "Computer (M.S)", "Math (N.D)", "English (T.B)"
+            ],
+            Wednesday: [
+                "Math (N.K)", "Nepali (D.S)", "Math (K.P)", "blank", "blank", 
+                "Physics (D.N)", "Computer (M.S)"
+            ],
+            Thursday: [
+                "Chemistry (S.R)", "Nepali (D.S)", "Chemistry (P.N)", "English (T.B)", 
+                "Math (N.K)", "Chemistry (J.Y)", "Computer (M.S)"
+            ],
+            Friday: [
+                "Math (N.K)", "Nepali (D.S)", "Math (N.K)", "English (T.B)", 
+                "Computer (M.S)", "Physics practical (R.P)", "Chemistry practical (J.Y)"
+            ],
+            Saturday: ["Duh! Serious bro?"]
+        };
+
+        function showRoutine() {
+            const selectedDay = document.getElementById('day').value;
+            const routine = routines[selectedDay] || ["No classes today"];
+            const routineList = document.getElementById('routine');
+            routineList.innerHTML = '';
+            routine.forEach(subject => {
+                const li = document.createElement('li');
+                li.textContent = subject;
+                routineList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
