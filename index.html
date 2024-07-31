@@ -14,22 +14,27 @@
             align-items: center;
             height: 100vh;
             background: url('bg.png') no-repeat center center fixed;
-            
+            background-size: cover;
         }
         .container {
-          
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px white;
             text-align: center;
             max-width: 400px;
             width: 90%;
-            
+            background: transparent;
         }
         .color {
             color: white;
         }
         h1 {
+            margin-bottom: 20px;
+            font-size: 34px;
+            color: white;
+            letter-spacing: 1.5px;
+        }
+        h2 {
             margin-bottom: 20px;
             font-size: 24px;
             color: white;
@@ -50,10 +55,8 @@
             color: white;
             border: none;
             cursor: pointer;
-            
             background: transparent;
             box-shadow: 0 0 20px white;
-            
         }
         button:hover {
             background-color: #fff;
@@ -62,29 +65,54 @@
         ul {
             list-style-type: none;
             padding: 0;
-            background: transparent;
         }
         li {
             padding: 10px 0;
             border-bottom: 1px solid #ddd;
-            color: white; /* Set to black */
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+        .message {
+            color: white;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>College Subject Routine</h1>
-        <label for="day">Select a Day:</label>
-        <select id="day">
-            <option value="Sunday">Sunday</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-        </select>
-        <button onclick="showRoutine()">Show Routine</button>
+        <h1>Kanchanjunga College</h1>
+        <h2>Subject Routine XI(E)</h2>
+        
+     
+        <div id="options">
+            <button onclick="chooseManual()">Manual</button>
+            <button onclick="chooseAutomatic()">Automatic</button>
+        </div>
+
+    
+        <div id="manual-selection" class="hidden">
+            <label for="day">Select a Day:</label>
+            <select id="day">
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+            </select>
+            <button onclick="showRoutine()">Show Routine</button>
+        </div>
+
+
+        <div id="automatic-selection" class="hidden">
+            <button onclick="showRoutine('today')">Show Today's Routine</button>
+            <button onclick="showRoutine('tomorrow')">Show Tomorrow's Routine</button>
+            <p id="verify-day" class="message"></p>
+        </div>
+
         <ul id="routine"></ul>
     </div>
 
@@ -117,8 +145,32 @@
             Saturday: ["Duh! Serious bro?"]
         };
 
-        function showRoutine() {
-            const selectedDay = document.getElementById('day').value;
+        function chooseManual() {
+            document.getElementById('options').classList.add('hidden');
+            document.getElementById('manual-selection').classList.remove('hidden');
+        }
+
+        function chooseAutomatic() {
+            document.getElementById('options').classList.add('hidden');
+            document.getElementById('automatic-selection').classList.remove('hidden');
+        }
+
+        function showRoutine(dayType) {
+            let selectedDay;
+            const today = new Date();
+            if (!document.getElementById('manual-selection').classList.contains('hidden')) {
+                selectedDay = document.getElementById('day').value;
+            } else {
+                if (dayType === 'today') {
+                    selectedDay = today.toLocaleDateString('en-US', { weekday: 'long' });
+                    document.getElementById('verify-day').textContent = "Today is " + selectedDay;
+                } else if (dayType === 'tomorrow') {
+                    const tomorrow = new Date(today);
+                    tomorrow.setDate(today.getDate() + 1);
+                    selectedDay = tomorrow.toLocaleDateString('en-US', { weekday: 'long' });
+                    document.getElementById('verify-day').textContent = "Tomorrow is " + selectedDay;
+                }
+            }
             const routine = routines[selectedDay] || ["No classes today"];
             const routineList = document.getElementById('routine');
             routineList.innerHTML = '';
