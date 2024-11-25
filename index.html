@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "fa4c04dd-9880-4cd3-88e0-2c4cdbcd2185",
-    });
-  });
-</script>
+    <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function(OneSignal) {
+            await OneSignal.init({
+                appId: "fa4c04dd-9880-4cd3-88e0-2c4cdbcd2185",
+            });
+        });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Routine</title>
@@ -21,6 +21,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             background: url('bg.png') no-repeat center center fixed;
             background-size: cover;
@@ -87,7 +88,6 @@
             color: white;
             margin-top: 10px;
         }
-        /* Styling for smaller button */
         .small-button {
             padding: 10px 14px;
             font-size: 14px;
@@ -103,6 +103,40 @@
             background-color: #fff;
             color: black;
         }
+
+        /* Bottom navigation bar styling */
+        .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+        padding: 10px 0;
+        z-index: 100;
+        border-radius: 10px;
+        margin: 0 10px;
+        box-shadow: 0 0 20px white; /* Box shadow for styling */
+    }
+
+    .nav-item {
+        text-align: center;
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        padding: 5px 15px;
+    }
+
+    .nav-item:hover {
+        color: #007bff;
+    }
+
+    .nav-item.active {
+        color: #007bff;
+        font-weight: bold;
+    }
     </style>
 </head>
 <body>
@@ -137,8 +171,13 @@
 
         <ul id="routine"></ul>
 
-        <!-- New smaller button for School Updates -->
         <button class="small-button" onclick="fetchSchoolUpdates()">School Updates</button>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item active">Home</a>
+        <a href="notification.html" class="nav-item">Notification</a>
     </div>
 
     <script>
