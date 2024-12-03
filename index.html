@@ -104,39 +104,39 @@
             color: black;
         }
 
-       
+        /* Bottom navigation bar styling */
         .bottom-nav {
-        position: fixed;
-        bottom: 30px;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
-        padding: 10px 0;
-        z-index: 100;
-        border-radius: 10px;
-        margin: 0 10px;
-        box-shadow: 0 0 20px white; /* Box shadow for styling */
-    }
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between; /* Space out items (left, center, right) */
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+            padding: 10px 20px;
+            z-index: 100;
+            border-radius: 10px;
+            margin: 0 10px;
+            box-shadow: 0 0 20px white; /* Box shadow for styling */
+        }
 
-    .nav-item {
-        text-align: center;
-        color: white;
-        font-size: 16px;
-        text-decoration: none;
-        padding: 5px 15px;
-    }
+        .nav-item {
+            text-align: center;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 5px 15px;
+        }
 
-    .nav-item:hover {
-        color: #007bff;
-    }
+        .nav-item:hover {
+            color: #007bff;
+        }
 
-    .nav-item.active {
-        color: #007bff;
-        font-weight: bold;
-    }
+        .nav-item.active {
+            color: #007bff;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -174,9 +174,11 @@
         <button class="small-button" onclick="fetchSchoolUpdates()">School Updates</button>
     </div>
 
+    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <a href="index.html" class="nav-item active">Home</a>
         <a href="notification.html" class="nav-item">Notification</a>
+        <a href="loadingbar.html" class="nav-item">Weather Check</a>
     </div>
 
     <script>
