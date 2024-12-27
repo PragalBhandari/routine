@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Section</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+
+        .subject-list {
+            width: 100%;
+            max-width: 300px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 1rem;
+        }
+
+        .subject-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .subject-list li {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .subject-list li:last-child {
+            border-bottom: none;
+        }
+
+        .subject-list li:hover {
+            background-color: #f0f8ff;
+        }
+
+        .notes-section {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 1rem;
+            padding: 1.5rem;
+        }
+
+        .notes-section h2 {
+            margin-top: 0;
+            color: #007bff;
+        }
+
+        .notes-section p {
+            color: #333;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Study Section</h1>
+        <p>Click on a subject to view notes</p>
+    </header>
+    <div class="container">
+        <div class="subject-list">
+            <ul>
+                <li onclick="showNotes('Physics')">Physics</li>
+                <li onclick="showNotes('Chemistry')">Chemistry</li>
+                <li onclick="showNotes('Math')">Math</li>
+                <li onclick="showNotes('Nepali')">Nepali</li>
+                <li onclick="showNotes('English')">English</li>
+                <li onclick="showNotes('Computer')">Computer</li>
+            </ul>
+        </div>
+        
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const subjects = {
+        'Physics': {},// No notes available for Physics
+        'Chemistry': {
+            description: 'Chemistry note is uploaded',
+            links: [
+                { title: 'Chemical Bonding, Atomic structure', url: 'Chemistrynote.html' },
+                { title: 'Empty Note', url: 'https://www.google.com' }
+            ]
+        }, 
+        'Math': {},// No notes available for Math
+        'Nepali': {}, // No notes available for Nepali
+        'English': {},// No notes available for English
+        'Computer': {}//No notes availabel for Computer
+    };
+
+    document.querySelectorAll('.subject-list li').forEach(item => {
+        item.addEventListener('click', () => {
+            const subject = item.textContent.trim();
+            const subjectData = subjects[subject];
+
+            // Remove existing popups
+            document.querySelectorAll('.popup').forEach(popup => popup.remove());
+
+            // Create popup content
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+
+            if (subjectData.description && subjectData.links) {
+                // Notes available
+                const linksHTML = subjectData.links.map(link => `
+                    <a href="${link.url}" target="_blank" style="color: #007bff; text-decoration: none; display: block; margin-top: 0.5rem;">
+                        ${link.title}
+                    </a>
+                `).join('');
+
+                popup.innerHTML = `
+                    <p>${subjectData.description}</p>
+                    ${linksHTML}
+                `;
+            } else {
+                // Notes not available
+                popup.innerHTML = `
+                    <p style="color: #888;">Notes are not available for ${subject} at the moment.</p>
+                `;
+            }
+
+            // Style the popup
+            popup.style.background = '#f9f9f9';
+            popup.style.border = '1px solid #ddd';
+            popup.style.padding = '1rem';
+            popup.style.marginTop = '0.5rem';
+            popup.style.borderRadius = '5px';
+
+            // Insert the popup after the clicked subject
+            item.after(popup);
+        });
+    });
+});
+    </script>
+    
+    
+    
+</body>
+</html>
