@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Docs Viewer</title>
     <style>
-        iframe {
-            width: 100%;
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
+            background-color: #f0f0f0;
+        }
+        iframe {
+            width: 100%; /* Full width for mobile screens */
+            height: 100%; /* Full height for mobile screens */
             border: none;
         }
     </style>
-    <title>PDF Viewer</title>
 </head>
 <body>
-    <iframe src="https://docs.google.com/document/d/1lZLwf2UXe05lpJl34RrJGi7d5Au5qEjQxhjBp8hcIC4/edit?usp=sharing" 
-            frameborder="0" allowfullscreen>
+    <iframe 
+        src="https://drive.google.com/file/d/1MROt7rKt1JwwzB6cd_in2UWIA2NUtD2P/preview" 
+        frameborder="0">
     </iframe>
 </body>
 </html>
