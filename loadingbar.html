@@ -147,7 +147,7 @@ body::before {
   <div class="login-container">
     <h2>Weather Check AI</h2>
     <div class="form-group">
-      <label for="location">Don't worry this music is auto-played</label>
+        <label for="location">Don't worry this music is auto-played</label>
       <label for="location">Enter your location:</label>
       <input type="text" id="location" placeholder="e.g., Birtamode" />
     </div>
@@ -158,6 +158,23 @@ body::before {
       <div class="loaderBar"></div>
     </div>
   </div>
+  <div id="custom-alert" style="
+    display: none; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: white; 
+    padding: 20px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    border-radius: 10px; 
+    z-index: 1000;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+">
+  Just look outside
+</div>
 
   <script>
     function startLoading() {
@@ -185,9 +202,22 @@ body::before {
           stageIndex++;
         } else {
           clearInterval(interval);
-          alert('Just look outside');
-        }
-      }, 2000); 
+
+          setTimeout(() => {  
+            alert('Just look outside'); 
+
+            const bgMusic = document.getElementById('background-music');
+            bgMusic.pause(); 
+
+            const tempMusic = new Audio('Jhuk.mp3'); 
+            tempMusic.play();
+
+            tempMusic.onended = () => {
+            bgMusic.play(); 
+            };
+          }, 100); 
+          }
+      }, 2000);
     }
   </script>
 </body>
